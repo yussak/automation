@@ -25,8 +25,8 @@ async function generateReplyFromUrlSelection() {
   ]);
 
   const recipient = answers.recipientName || "採用担当者";
-  const message = `${answers.companyName}
-
+  const message = `
+${answers.companyName}
 ${recipient}様
 
 お世話になっております、${process.env.LAST_NAME}と申します。
@@ -59,11 +59,12 @@ async function generateThanksReply() {
 
   const recipient = answers.recipientName || "採用担当者";
 
-  const message = `${answers.companyName}
+  const message = `
+${answers.companyName}
 ${recipient}様
 
 お世話になっております、${process.env.LAST_NAME}と申します。
-お忙しい所調整をいただきありがとうございました。
+お忙しい所面談の調整をいただきありがとうございました。
 
 当日はよろしくお願いいたします。 `;
 
