@@ -25,8 +25,8 @@ async function generateReplyFromUrlSelection() {
   ]);
 
   const recipient = answers.recipientName || "採用担当者";
-
   const message = `${answers.companyName}
+
 ${recipient}様
 
 お世話になっております、${process.env.LAST_NAME}と申します。
@@ -42,6 +42,35 @@ ${recipient}様
   console.log(message);
 }
 
+async function generateThanksReply() {
+  const answers = await prompts([
+    {
+      type: "text",
+      name: "companyName",
+      message: "会社名を入力してください（例: 株式会社あ）",
+    },
+    {
+      type: "text",
+      name: "recipientName",
+      message:
+        "担当者名を入力してください（空欄の場合は「採用担当者」になります）",
+    },
+  ]);
+
+  const recipient = answers.recipientName || "採用担当者";
+
+  const message = `${answers.companyName}
+${recipient}様
+
+お世話になっております、${process.env.LAST_NAME}と申します。
+お忙しい所調整をいただきありがとうございました。
+
+当日はよろしくお願いいたします。 `;
+
+  console.log("\n--- 生成されたメッセージ ---\n");
+  console.log(message);
+}
+
 async function main() {
   const { action } = await prompts({
     type: "select",
@@ -49,13 +78,16 @@ async function main() {
     message: "やりたいことを選択してください",
     choices: [
       { title: "返信文章生成（URLから選択したパターン）", value: "reply" },
-      // 今後追加: { title: '日程提示パターン', value: 'schedule' }
+      { title: "調整のお礼", value: "thanks" },
     ],
   });
 
   switch (action) {
     case "reply":
       await generateReplyFromUrlSelection();
+      break;
+    case "thanks":
+      await generateThanksReply();
       break;
     default:
       console.log("キャンセルされました");
