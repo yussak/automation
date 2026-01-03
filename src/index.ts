@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import 'dotenv/config';
 import prompts from 'prompts';
 
 async function generateReplyFromUrlSelection() {
@@ -27,7 +28,7 @@ async function generateReplyFromUrlSelection() {
   const message = `${answers.companyName}
 ${recipient}様
 
-お世話になっております、xxと申します。
+お世話になっております、${process.env.LAST_NAME}と申します。
 カジュアル面談の機会をいただきありがとうございます！
 
 いただいたURLより、以下日程を選択いたしました。こちらでご調整いただけますでしょうか。
